@@ -20,7 +20,7 @@ img_size = img_height * img_width
 
 to_train = True
 to_restore = False
-output_path = "output"
+output_path = "mnist_output"
 
 max_epoch = 500
 
@@ -173,8 +173,8 @@ def train():
     ## go training in 500 epoch
     for i in range(sess.run(global_step), max_epoch):
         ## 233 iteration in each epoch 
-        for j in range(60000 / batch_size):
-            print "epoch:%s, iter:%s" % (i, j)
+        for j in range(int(60000 / batch_size)):
+            print("epoch:%s, iter:%s" % (i, j))
             x_value, _ = mnist.train.next_batch(batch_size)     # return image (shape=(batch, 784)) and label (shape=(batch,10))
             x_value    = 2 * x_value.astype(np.float32) - 1     # centralize
             z_value    = np.random.normal(0, 1, size=(batch_size, z_size)).astype(np.float32)   # generate noise samples z
